@@ -14,8 +14,8 @@ public class CharacterTurretRoation : MonoBehaviour
     {
         Controls = new CustomInput();
 
-        Controls.Player.Rotate.performed += cntxt => rot = cntxt.ReadValue<Vector2>();
-        Controls.Player.Rotate.canceled += cntxt => rot = Vector2.zero;
+        //Controls.Player.Rotate.performed += cntxt => rot = cntxt.ReadValue<Vector2>();
+        //Controls.Player.Rotate.canceled += cntxt => rot = Vector2.zero;
     }
 
     private void Update()

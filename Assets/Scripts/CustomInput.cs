@@ -46,9 +46,18 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Rotate"",
+                    ""name"": ""MouseRotate"",
                     ""type"": ""PassThrough"",
                     ""id"": ""08a7a2bf-bfd5-4c64-95a2-51e196895f4f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""StickRotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""e33ecf10-0096-406b-9426-9d3c803b97e8"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -322,12 +331,23 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""06005551-6503-46e0-a637-c9a2ad10ecc3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d60e92ad-8349-409d-bfcb-003b0a69f1b0"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""MouseRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -338,7 +358,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""StickRotate"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -349,7 +369,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""StickRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -360,7 +380,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""StickRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -371,7 +391,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""StickRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -382,7 +402,62 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""StickRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""cf0ca2cf-85f6-417e-965d-efe310453ce2"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickRotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""6f5e3011-995d-42be-85a6-86532bca8bbf"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""67a7560a-e3ef-48aa-a98e-0423cd2a7af5"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""540fac2d-b110-461b-92dd-d89eac615598"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6a731876-23f9-4166-bc57-da1147cc2482"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -395,7 +470,8 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-        m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        m_Player_MouseRotate = m_Player.FindAction("MouseRotate", throwIfNotFound: true);
+        m_Player_StickRotate = m_Player.FindAction("StickRotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -459,14 +535,16 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Shoot;
-    private readonly InputAction m_Player_Rotate;
+    private readonly InputAction m_Player_MouseRotate;
+    private readonly InputAction m_Player_StickRotate;
     public struct PlayerActions
     {
         private @CustomInput m_Wrapper;
         public PlayerActions(@CustomInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-        public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
+        public InputAction @MouseRotate => m_Wrapper.m_Player_MouseRotate;
+        public InputAction @StickRotate => m_Wrapper.m_Player_StickRotate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -482,9 +560,12 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @Rotate.started += instance.OnRotate;
-            @Rotate.performed += instance.OnRotate;
-            @Rotate.canceled += instance.OnRotate;
+            @MouseRotate.started += instance.OnMouseRotate;
+            @MouseRotate.performed += instance.OnMouseRotate;
+            @MouseRotate.canceled += instance.OnMouseRotate;
+            @StickRotate.started += instance.OnStickRotate;
+            @StickRotate.performed += instance.OnStickRotate;
+            @StickRotate.canceled += instance.OnStickRotate;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -495,9 +576,12 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @Rotate.started -= instance.OnRotate;
-            @Rotate.performed -= instance.OnRotate;
-            @Rotate.canceled -= instance.OnRotate;
+            @MouseRotate.started -= instance.OnMouseRotate;
+            @MouseRotate.performed -= instance.OnMouseRotate;
+            @MouseRotate.canceled -= instance.OnMouseRotate;
+            @StickRotate.started -= instance.OnStickRotate;
+            @StickRotate.performed -= instance.OnStickRotate;
+            @StickRotate.canceled -= instance.OnStickRotate;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -519,6 +603,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
+        void OnMouseRotate(InputAction.CallbackContext context);
+        void OnStickRotate(InputAction.CallbackContext context);
     }
 }

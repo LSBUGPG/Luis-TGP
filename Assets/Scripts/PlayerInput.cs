@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour
     private Rigidbody2D rb = null;
     public float moveSpeed = 10f;
     public float turretRotationSpeed = 10f;
+    float turretDirection;
 
     //This line gets the transform value of the turret
     public Transform turretParent;
@@ -71,8 +72,10 @@ public class PlayerInput : MonoBehaviour
         input.Player.Movement.canceled += OnMovementCancelled;
         input.Player.Shoot.performed += OnShootPerformed;
         input.Player.Shoot.canceled += OnShootCancelled;
-        input.Player.Rotate.performed += OnRotatePerformed;
-        input.Player.Rotate.canceled += OnRotateCancelled;
+        input.Player.MouseRotate.performed += OnMouseRotatePerformed;
+        input.Player.MouseRotate.canceled += OnMouseRotateCancelled;
+        input.Player.StickRotate.performed += OnStickRotatePerformed;
+        input.Player.StickRotate.canceled += OnStickRotateCancelled;
     }
 
     private void OnDisable()
@@ -82,8 +85,10 @@ public class PlayerInput : MonoBehaviour
         input.Player.Shoot.performed -= OnShootPerformed;
         input.Player.Movement.canceled -= OnMovementCancelled;
         input.Player.Shoot.canceled -= OnShootCancelled;
-        input.Player.Rotate.performed -= OnRotatePerformed;
-        input.Player.Rotate.canceled -= OnRotateCancelled;
+        input.Player.MouseRotate.performed -= OnMouseRotatePerformed;
+        input.Player.MouseRotate.canceled -= OnMouseRotateCancelled;
+        input.Player.StickRotate.performed -= OnStickRotatePerformed;
+        input.Player.StickRotate.canceled -= OnStickRotateCancelled;
     }
     private void Update()
     {
@@ -194,27 +199,33 @@ public class PlayerInput : MonoBehaviour
 
     }
 
-    void OnRotatePerformed(InputAction.CallbackContext value)
+    void OnMouseRotatePerformed(InputAction.CallbackContext value)
     {
-        /*Debug.Log($"mouse move performed {value.ReadValue<Vector2>()}");
-        Vector3 mousePosition = value.ReadValue<Vector2>();
-        OnMoveTurret?.Invoke(GetMousePosition(mousePosition));*/
-
-        var turretDirection = (Vector3)pointerPosition - turretParent.position;
-        var desiredAngle = Mathf.Atan2(turretDirection.y, turretDirection.x) * Mathf.Rad2Deg;
-        var rotationStep = turretRotationSpeed * Time.deltaTime;
-        turretParent.rotation = Quaternion.RotateTowards(turretParent.rotation, Quaternion.Euler(0, 0, desiredAngle), rotationStep);
-
-    }
-    void OnRotateCancelled(InputAction.CallbackContext value)
-    {
-        Debug.Log($"mouse move cancelled {value.ReadValue<Vector2>()}");
+        // Debug.Log($"mouse move performed {value.ReadValue<Vector2>()}");
+        // Vector3 mousePosition = value.ReadValue<Vector2>();
+        // OnMoveTurret?.Invoke(GetMousePosition(mousePosition));
     }
 
+    void OnMouseRotateCancelled(InputAction.CallbackContext value)
+    {
+        //Debug.Log($"mouse move cancelled {value.ReadValue<Vector2>()}");
+    }
+
+    void OnStickRotatePerformed(InputAction.CallbackContext value)
+    {
+        turretDirection = value.ReadValue<Vector2>().x;
+        Debug.Log($"stick move performed {turretDirection}");
+    }
+
+    void OnStickRotateCancelled(InputAction.CallbackContext value)
+    {
+        turretDirection = 0f;
+        Debug.Log($"stick move cancelled {value.ReadValue<Vector2>().x}");
+    }
 
     private void GetTurretMovement()
     {
-
+        turretParent.Rotate(Vector3.back, turretDirection * turretRotationSpeed * Time.deltaTime);
     }
 
     private Vector2 GetMousePosition(Vector3 mousePosition)
@@ -228,11 +239,9 @@ public class PlayerInput : MonoBehaviour
 
     public void HandleTurretMovement(Vector2 pointerPosition)
     {
-        /*var turretDirection = (Vector3)pointerPosition - turretParent.position;
+        var turretDirection = (Vector3)pointerPosition - turretParent.position;
         var desiredAngle = Mathf.Atan2(turretDirection.y, turretDirection.x) * Mathf.Rad2Deg;
         var rotationStep = turretRotationSpeed * Time.deltaTime;
-        turretParent.rotation = Quaternion.RotateTowards(turretParent.rotation, Quaternion.Euler(0,0,desiredAngle),rotationStep);*/
-
+        turretParent.rotation = Quaternion.RotateTowards(turretParent.rotation, Quaternion.Euler(0,0,desiredAngle),rotationStep);
     }
-
 }
