@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
     private Rigidbody2D rb = null;
     public float moveSpeed = 10f;
     public float turretRotationSpeed = 10f;
-    float turretDirection;
+    float turretDirection = 0f;
 
     //This line gets the transform value of the turret
     public Transform turretParent;
@@ -213,19 +213,16 @@ public class PlayerInput : MonoBehaviour
 
     void OnStickRotatePerformed(InputAction.CallbackContext value)
     {
-        turretDirection = value.ReadValue<Vector2>().x;
-        Debug.Log($"stick move performed {turretDirection}");
+        turretDirection = Vector2.SignedAngle(Vector2.right, value.ReadValue<Vector2>());
     }
 
     void OnStickRotateCancelled(InputAction.CallbackContext value)
     {
-        turretDirection = 0f;
-        Debug.Log($"stick move cancelled {value.ReadValue<Vector2>().x}");
     }
 
     private void GetTurretMovement()
     {
-        turretParent.Rotate(Vector3.back, turretDirection * turretRotationSpeed * Time.deltaTime);
+        turretParent.rotation = Quaternion.RotateTowards(turretParent.rotation, Quaternion.Euler(0, 0, turretDirection), turretRotationSpeed * Time.deltaTime);
     }
 
     private Vector2 GetMousePosition(Vector3 mousePosition)
